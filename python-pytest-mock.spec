@@ -6,13 +6,13 @@ to worry about undoing patches at the end of a test.
 
 
 Name:           python-%{pypi_name}
-Version:        1.1
-Release:        3%{?dist}
+Version:        1.2
+Release:        1%{?dist}
 Summary:        Thin-wrapper around the mock package for easier use with py.test
 
 License:        MIT
 URL:            https://pypi.python.org/pypi/pytest-mock
-Source0:        https://pypi.python.org/packages/99/0e/45906c1e876b175cb51d8710075be900948f44a5f6a92c90095bdcd846c8/%{pypi_name}-%{version}.zip
+Source0:        https://pypi.python.org/packages/30/11/a5a8009eff04bc15c37e2f8e33d8ed99adf828ec8f551fb31d99f6c73b5b/pytest-mock-1.2.zip
 BuildArch:      noarch
 
 %description
@@ -84,6 +84,9 @@ PYTHONPATH="$(pwd)" py.test-%{python3_version} test_pytest_mock.py
 
 
 %changelog
+* Sun Sep 18 2016 Julien Enselme <jujens@jujens.eu> - 1.2-1
+- Update to 1.2
+
 * Wed Aug 31 2016 Julien Enselme <jujens@jujens.eu> - 1.1-3
 - Use %%summary instead of custom %%sum macro
 
