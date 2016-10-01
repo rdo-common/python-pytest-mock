@@ -7,12 +7,14 @@ to worry about undoing patches at the end of a test.
 
 Name:           python-%{pypi_name}
 Version:        1.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Thin-wrapper around the mock package for easier use with py.test
 
 License:        MIT
 URL:            https://pypi.python.org/pypi/pytest-mock
 Source0:        https://pypi.python.org/packages/30/11/a5a8009eff04bc15c37e2f8e33d8ed99adf828ec8f551fb31d99f6c73b5b/pytest-mock-1.2.zip
+# From: https://github.com/pytest-dev/pytest-mock/pull/63
+Patch0:         fix-for-pytest3.patch
 BuildArch:      noarch
 
 %description
@@ -48,6 +50,7 @@ Requires:       python3-pytest >= 2.7
 %prep
 %setup -qn %{pypi_name}-%{version}
 rm -rf *.egg-info
+patch -p1 --binary < %{PATCH0}
 
 # Correct end of line encoding for README
 sed -i 's/\r$//' README.rst
@@ -84,6 +87,9 @@ PYTHONPATH="$(pwd)" py.test-%{python3_version} test_pytest_mock.py
 
 
 %changelog
+* Sat Oct 01 2016 Julien Enselme <jujens@jujens.eu> - 1.2-2
+- Add patch to fix tests with pytest3
+
 * Sun Sep 18 2016 Julien Enselme <jujens@jujens.eu> - 1.2-1
 - Update to 1.2
 
