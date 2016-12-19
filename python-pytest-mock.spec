@@ -7,7 +7,7 @@ to worry about undoing patches at the end of a test.
 
 Name:           python-%{pypi_name}
 Version:        1.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Thin-wrapper around the mock package for easier use with py.test
 
 License:        MIT
@@ -87,6 +87,9 @@ PYTHONPATH="$(pwd)" py.test-%{python3_version} test_pytest_mock.py
 
 
 %changelog
+* Mon Dec 19 2016 Miro Hrončok <mhroncok@redhat.com> - 1.2-3
+- Rebuild for Python 3.6
+
 * Sat Oct 01 2016 Julien Enselme <jujens@jujens.eu> - 1.2-2
 - Add patch to fix tests with pytest3
 
