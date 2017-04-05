@@ -6,15 +6,13 @@ to worry about undoing patches at the end of a test.
 
 
 Name:           python-%{pypi_name}
-Version:        1.2
-Release:        4%{?dist}
+Version:        1.6.0
+Release:        1%{?dist}
 Summary:        Thin-wrapper around the mock package for easier use with py.test
 
 License:        MIT
 URL:            https://pypi.python.org/pypi/pytest-mock
-Source0:        https://pypi.python.org/packages/30/11/a5a8009eff04bc15c37e2f8e33d8ed99adf828ec8f551fb31d99f6c73b5b/pytest-mock-1.2.zip
-# From: https://github.com/pytest-dev/pytest-mock/pull/63
-Patch0:         fix-for-pytest3.patch
+Source0:        https://pypi.python.org/packages/59/2a/18c5a08809b6383e6b1026d0307fa49f8eac1eaf9657bcd3446c7822cffd/pytest-mock-1.6.0.tar.gz
 BuildArch:      noarch
 
 %description
@@ -50,7 +48,6 @@ Requires:       python3-pytest >= 2.7
 %prep
 %setup -qn %{pypi_name}-%{version}
 rm -rf *.egg-info
-patch -p1 --binary < %{PATCH0}
 
 # Correct end of line encoding for README
 sed -i 's/\r$//' README.rst
@@ -76,6 +73,7 @@ PYTHONPATH="$(pwd)" py.test-%{python3_version} test_pytest_mock.py
 %license LICENSE
 %{python2_sitelib}/%{file_name}-%{version}-py%{python2_version}.egg-info/
 %{python2_sitelib}/%{file_name}.py*
+%{python2_sitelib}/_pytest_mock_version.py*
 
 
 %files -n python3-%{pypi_name}
@@ -84,9 +82,14 @@ PYTHONPATH="$(pwd)" py.test-%{python3_version} test_pytest_mock.py
 %{python3_sitelib}/%{file_name}-%{version}-py%{python3_version}.egg-info/
 %{python3_sitelib}/%{file_name}.py*
 %{python3_sitelib}/__pycache__/%{file_name}*.py*
+%{python3_sitelib}/_pytest_mock_version.py*
+%{python3_sitelib}/__pycache__/_pytest_mock_version.cpython*
 
 
 %changelog
+* Wed Apr 05 2017 Julien Enselme <jujens@jujens.eu> - 1.6.0-1
+- Update to 1.6.0
+
 * Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 1.2-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
