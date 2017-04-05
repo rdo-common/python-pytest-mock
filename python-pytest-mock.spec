@@ -7,7 +7,7 @@ to worry about undoing patches at the end of a test.
 
 Name:           python-%{pypi_name}
 Version:        1.6.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Thin-wrapper around the mock package for easier use with py.test
 
 License:        MIT
@@ -24,6 +24,7 @@ BuildArch:      noarch
 BuildRequires:  python2-devel
 BuildRequires:  python2-pytest >= 2.7
 BuildRequires:  python2-mock
+BuildRequires:  python2-setuptools_scm
 Requires:       python2-pytest >= 2.7
 Requires:       python2-mock
 Summary:        %{summary}
@@ -38,6 +39,7 @@ Summary:        %{summary}
 BuildArch:      noarch
 BuildRequires:  python3-devel
 BuildRequires:  python3-pytest >= 2.7
+BuildRequires:  python3-setuptools_scm
 Requires:       python3-pytest >= 2.7
 %{?python_provide:%python_provide python3-%{pypi_name}}
 
@@ -87,6 +89,9 @@ PYTHONPATH="$(pwd)" py.test-%{python3_version} test_pytest_mock.py
 
 
 %changelog
+* Wed Apr 05 2017 Julien Enselme <jujens@jujens.eu> - 1.6.0-2
+- Add missing BR
+
 * Wed Apr 05 2017 Julien Enselme <jujens@jujens.eu> - 1.6.0-1
 - Update to 1.6.0
 
