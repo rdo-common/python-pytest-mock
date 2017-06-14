@@ -1,3 +1,7 @@
+%if 0%{?fedora}
+%global with_python3 1
+%endif
+
 %global pypi_name pytest-mock
 %global file_name pytest_mock
 %global desc This plugin installs a mocker fixture which is a thin-wrapper around the \
@@ -25,6 +29,7 @@ BuildRequires:  python2-devel
 BuildRequires:  python2-pytest >= 2.7
 BuildRequires:  python2-mock
 BuildRequires:  python2-setuptools_scm
+BuildRequires:  python-setuptools
 Requires:       python2-pytest >= 2.7
 Requires:       python2-mock
 Summary:        %{summary}
@@ -34,6 +39,7 @@ Summary:        %{summary}
 %{desc}
 
 
+%if 0%{?with_python3}
 %package -n     python3-%{pypi_name}
 Summary:        %{summary}
 BuildArch:      noarch
@@ -45,6 +51,7 @@ Requires:       python3-pytest >= 2.7
 
 %description -n python3-%{pypi_name}
 %{desc}
+%endif
 
 
 %prep
@@ -57,17 +64,23 @@ sed -i 's/\r$//' README.rst
 
 %build
 %py2_build
+%if 0%{?with_python3}
 %py3_build
+%endif
 
 
 %install
+%if 0%{?with_python3}
 %py3_install
+%endif
 %py2_install
 
 
 %check
 PYTHONPATH="$(pwd)" py.test-%{python2_version} test_pytest_mock.py
+%if 0%{?with_python3}
 PYTHONPATH="$(pwd)" py.test-%{python3_version} test_pytest_mock.py
+%endif
 
 
 %files -n python2-%{pypi_name}
@@ -78,6 +91,7 @@ PYTHONPATH="$(pwd)" py.test-%{python3_version} test_pytest_mock.py
 %{python2_sitelib}/_pytest_mock_version.py*
 
 
+%if 0%{?with_python3}
 %files -n python3-%{pypi_name}
 %doc README.rst
 %license LICENSE
@@ -86,6 +100,7 @@ PYTHONPATH="$(pwd)" py.test-%{python3_version} test_pytest_mock.py
 %{python3_sitelib}/__pycache__/%{file_name}*.py*
 %{python3_sitelib}/_pytest_mock_version.py*
 %{python3_sitelib}/__pycache__/_pytest_mock_version.cpython*
+%endif
 
 
 %changelog
