@@ -6,13 +6,13 @@ to worry about undoing patches at the end of a test.
 
 
 Name:           python-%{pypi_name}
-Version:        1.7.0
+Version:        1.7.1
 Release:        1%{?dist}
 Summary:        Thin-wrapper around the mock package for easier use with py.test
 
 License:        MIT
 URL:            https://pypi.python.org/pypi/pytest-mock
-Source0:        https://files.pythonhosted.org/packages/8c/51/ebdeaeb5ec7b98bbab8fd1c857ef61cf06092147a95e49f6d9d6fa7e8884/pytest-mock-1.7.0.tar.gz
+Source0:        https://pypi.python.org/packages/a9/d9/9e2eb59c0038a1b1fcd9a9fa4be8cac65b629667163d0faa24366d05cc8c/pytest-mock-1.7.1.tar.gz
 BuildArch:      noarch
 
 %description
@@ -89,6 +89,9 @@ PYTHONPATH="$(pwd)" py.test-%{python3_version} test_pytest_mock.py
 
 
 %changelog
+* Thu Mar 01 2018 Julien Enselme <jujens@jujens.eu> - 1.7.1-1
+- Update to 1.7.1
+
 * Mon Feb 19 2018 Julien Enselme <jujens@jujesn.eu> - 1.7.0-1
 - Update to 1.7.0
 
