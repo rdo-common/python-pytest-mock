@@ -7,7 +7,7 @@ to worry about undoing patches at the end of a test.
 
 Name:           python-%{pypi_name}
 Version:        1.10.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Thin-wrapper around the mock package for easier use with py.test
 
 License:        MIT
@@ -89,6 +89,9 @@ PYTHONPATH="$(pwd)" py.test-%{python3_version} test_pytest_mock.py
 
 
 %changelog
+* Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 1.10.0-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
 * Mon Jun 18 2018 Miro Hrončok <mhroncok@redhat.com> - 1.10.0-2
 - Rebuilt for Python 3.7
 
