@@ -4,6 +4,9 @@
 patching API provided by the mock package, but with the benefit of not having \
 to worry about undoing patches at the end of a test.
 
+%if 0%{?fedora}
+%global with_python3 1
+%endif
 
 Name:           python-%{pypi_name}
 Version:        1.10.0
@@ -34,6 +37,7 @@ Summary:        %{summary}
 %{desc}
 
 
+%if 0%{?with_python3}
 %package -n     python3-%{pypi_name}
 Summary:        %{summary}
 BuildArch:      noarch
@@ -45,7 +49,7 @@ Requires:       python3-pytest >= 2.7
 
 %description -n python3-%{pypi_name}
 %{desc}
-
+%endif
 
 %prep
 %setup -qn %{pypi_name}-%{version}
@@ -57,17 +61,23 @@ sed -i 's/\r$//' README.rst
 
 %build
 %py2_build
+%if 0%{?with_python3}
 %py3_build
+%endif
 
 
 %install
+%if 0%{?with_python3}
 %py3_install
+%endif
 %py2_install
 
 
 %check
 PYTHONPATH="$(pwd)" py.test-%{python2_version} test_pytest_mock.py
+%if 0%{?with_python3}
 PYTHONPATH="$(pwd)" py.test-%{python3_version} test_pytest_mock.py
+%endif
 
 
 %files -n python2-%{pypi_name}
@@ -78,6 +88,7 @@ PYTHONPATH="$(pwd)" py.test-%{python3_version} test_pytest_mock.py
 %{python2_sitelib}/_pytest_mock_version.py*
 
 
+%if 0%{?with_python3}
 %files -n python3-%{pypi_name}
 %doc README.rst
 %license LICENSE
@@ -86,6 +97,7 @@ PYTHONPATH="$(pwd)" py.test-%{python3_version} test_pytest_mock.py
 %{python3_sitelib}/__pycache__/%{file_name}*.py*
 %{python3_sitelib}/_pytest_mock_version.py*
 %{python3_sitelib}/__pycache__/_pytest_mock_version.cpython*
+%endif
 
 
 %changelog
